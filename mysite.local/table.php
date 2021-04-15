@@ -38,43 +38,26 @@
       <input type='submit' value='Создать' />
     </form>
     <!-- Таблица -->
-    <table border='1' width="200">
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>4</td>
-        <td>6</td>
-        <td>8</td>
-        <td>10</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>6</td>
-        <td>9</td>
-        <td>12</td>
-        <td>15</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>8</td>
-        <td>12</td>
-        <td>16</td>
-        <td>10</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>10</td>
-        <td>15</td>
-        <td>20</td>
-        <td>25</td>
-      </tr>
-    </table>
+<?php
+function drawTable ($cols = 10, $rows = 10, $background = 'teal') {
+    echo "<table border = '1' width='500' text-align:center>";
+    for ($tr = 1; $tr <= $rows; $tr++) { 
+        echo "<tr>"; 
+            for ($td = 1; $td <= $cols; $td++) { 
+                if ($tr == 1 || $td == 1) {
+                   echo "<th style = 'background : {$background}'>" . $tr * $td . "</th>"; 
+                } else
+                echo "<td>" . $tr * $td . "</td>"; 
+                }
+            }
+        echo "</tr>";
+     echo "</table>";
+    }
+
+?>
+  <?php
+    drawTable (10, 10, 'teal');
+  ?>
     <!-- Таблица -->
     <!-- Область основного контента -->
   </div>
