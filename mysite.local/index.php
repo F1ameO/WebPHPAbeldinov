@@ -1,10 +1,10 @@
 <?php
-  // Установка локали и выбор значений даты
-  setlocale(LC_ALL, "russian");
-  $day = strftime('%d');
-  $mon = strftime('%B');
-  $year = strftime('%Y');
-  /*
+// Установка локали и выбор значений даты
+setlocale(LC_ALL, "russian");
+$day = strftime('%d');
+$mon = strftime('%m');
+$year = strftime('%Y');
+/*
 * Получаем текущий час в виде строки от 00 до 23
 * и приводим строку к целому числу от 0 до 23
 */
@@ -12,27 +12,35 @@ $hour = (int) strftime('%H');
 $welcome = ''; // Инициализируем переменную для приветствия
 
 if ($hour > 0 && $hour < 6) {
-  $welcome = 'Доброе ночи';
-}
-elseif ($hour > 6 && $hour < 12) {
+  $welcome = 'Доброй ночи';
+} elseif ($hour >= 6 && $hour < 12) {
   $welcome = 'Доброе утро';
+} elseif ($hour >= 12 && $hour < 18) {
+  $welcome = 'Добрый день';
+} elseif ($hour >= 18 && $hour < 23) {
+  $welcome = 'Добрый вечер';
+} else {
+  $welcome = 'Доброй ночи';
 }
-elseif ($hour > 12 && $hour < 18) {
-  $welcome = 'Доброе день';
-}
-elseif ($hour > 18 && $hour < 23) {
-  $welcome = 'Доброе вечер';
-}
-else {
-  $welcome = 'Доброе ночи';
-}
-   $leftMenu = [
-      ['link'=>'Домой', 'href'=>'index.php'],
-      ['link'=>'О нас', 'href'=>'about.php'],
-      ['link'=>'Контакты', 'href'=>'contact.php'],
-      ['link'=>'Таблица умножения', 'href'=>'table.php'],
-      ['link'=>'Калькулятор', 'href'=>'calc.php'],
-    ];
+
+$leftMenu = [
+  ['link' => 'Домой', 'href' => 'index.php'],
+  ['link' => 'О нас', 'href' => 'about.php'],
+  ['link' => 'Контакты', 'href' => 'contact.php'],
+  ['link' => 'Таблица умножения', 'href' => 'table.php'],
+  ['link' => 'Калькулятор', 'href' => 'calc.php']
+];
+
+
+function drawMenu($menu, $vertical=true){
+  $style='';
+    if(!$vertical){$style = "";}
+      echo "<ul style='list-style-type:none'>";
+      foreach($menu as $link=>$href){
+        echo "<li$style><a href='$href'>$link</a></li>";
+      }
+      echo "</ul>";
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,9 +62,8 @@ else {
 
   <div id="content">
     <!-- Заголовок -->
-    <h1><?= $welcome ?>, Гость!</h1>
+    <h1>Добро пожаловать на наш сайт!</h1>
     <!-- Заголовок -->
-    <!-- Область основного контента -->
     <blockquote>
       <?php echo 'Сегодня ', $day, ' число, ', $mon, ' месяц, ', $year, ' год.'; ?>
     </blockquote>
@@ -77,22 +84,23 @@ else {
     <!-- Навигация -->
     <h2>Навигация по сайту</h2>
     <!-- Меню -->
-   <?php
-    foreach ($leftMenu as $item) { // $item - внутренний массив
-      echo "<ul>";
-      echo "<li>";
-      echo "<a href='{$item['href']}'> {$item['link']} </a>";
-      echo "</li>";
-      echo "</ul>";
-    }
+    <?php
+    $menu = array(
+      'Домой' => "index.php",
+      'О нас'=> "about.php",
+      'Контакты'=> "contact.php",
+      'Таблица умножения'=> "table.php",
+      'Калькулятор'=> "calc.php"
+      );
+  drawMenu($menu, false);
     ?>
-    <!-- Меню -->
     <!-- Навигация -->
   </div>
   <div id="footer">
     <!-- Нижняя часть страницы -->
-    &copy; Супер Мега Веб-мастер, 2000 &ndash; <?echo $year; ?>
+    &copy; Супер Мега Веб-мастер, 2000 &ndash;
     <!-- Нижняя часть страницы -->
+    <?php echo $year; ?>
   </div>
 </body>
 
