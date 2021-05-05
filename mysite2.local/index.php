@@ -1,16 +1,19 @@
 <?php 
   include 'inc/headers.inc.php'; 
-  include 'inc/cookie.inc.php';
-  echo "</br>";
+  include 'inc/cookie.inc.php'; 
+  
+if ($visitCounter <= 1) {
+  $welcome = 'Спасибо, что зашли на огонек';
+} 
+else{
+  $welcome = 'Вы зашли к нам такой-то раз';
 
-  if ($visitCounter <= 1) {
-    $welcome = 'Спасибо, что зашли на огонек';
-  } 
-  else{
-    $welcome = 'Вы зашли к нам такой-то раз';
-  }
+  // Имя файла журнала
+define('PATH_LOG', 'path.log');
+include 'inc/log.inc.php';
+}
 
-  echo $welcome;
+echo $welcome
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,6 +58,8 @@
       <li><a href='index.php?id=info'>Информация</a>
       </li>
       <li><a href='index.php?id=gbook'>Гостевая книга</a>
+      </li>
+      <li><a href='index.php?id=log'>Журнал посещений</a>
       </li>
     </ul>
     <!-- Навигация -->

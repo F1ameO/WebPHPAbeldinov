@@ -12,4 +12,5 @@ $counter = date('Y-m-d H:i:s');
 else 
 $counter = $counter; 
 echo "Последний раз вы заходили $counter";
+echo "</br>";
 ?>
